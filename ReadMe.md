@@ -8,3 +8,5 @@ Rules of Slot Machine Game:
 5. Has the User won?
 6. Settle Money with the User
 7. Play Again or No Money Left?
+
+Some symbols are more rare than others, thereby winning those will lead to a higher return!

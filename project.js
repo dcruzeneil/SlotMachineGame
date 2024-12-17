@@ -81,11 +81,59 @@ const spin = () => {
     return reels;
 };
 
+const print_reels = (reels) => {
+    for (let row = 0; row < ROWS; row++){
+        temp = "";
+        for(let col = 0; col < COLS; col++){
+            temp += reels[col][row];
+            if(col != COLS - 1){
+                temp += " | "
+            }
+        }
+        console.log(temp);
+    }
+};
+
+const userWinnings = (bet, lines, reels) => {
+    let winnings = 0;
+    for (let row = 0; row < lines; row++){
+        let isValid = true;
+        const symbol = reels[0][row];
+        for(let col = 0; col < COLS; col++){
+           if(reels[col][row] != reels[0][row]){   
+            isValid = false;
+            break;
+           }
+        }
+        if(isValid == true){
+            winnings += bet * SYMBOLS_VALUES[symbol];
+        }
+    }
+    return winnings;
+};
+
 const game = () => {
     let userBalance = depositMoney();
-    const numberLines = determineNumberOfLines();
-    const numberBet = userBetAmount(userBalance, numberLines);
-    const reels = spin();
+    while(true){
+        const numberLines = determineNumberOfLines();
+        const numberBet = userBetAmount(userBalance, numberLines);
+        userBalance = userBalance - (numberBet * numberLines);
+        console.log("Your remaining balance now is: $" + userBalance + "\n");
+        const reels = spin();
+        print_reels(reels);
+        const winning = userWinnings(numberBet, numberLines, reels);
+        userBalance += winning;
+        if(userBalance <= 0){
+            console.log("Unfortunately, you are out of funds!\n");
+            break;
+        } else{
+            console.log("Your net funds are $" + userBalance + "\n");
+            const playAgain = prompt("Do you want to play again? (y/n)");
+            if(playAgain != "y"){
+                break;
+            }
+        }
+    }   
 }
 
 game();
