@@ -12,4 +12,4 @@ The multiplier values for matching different values (based on probabilities) are
     <li>A: 1</li>
 </ol>
      
-For instance, if you put a wager of 2 coins on a row and that row gets matching \$'s like "\$ | \$ | \$", then you get 4 coins multiplied by your investment (4 * 2 = 8) back for that particular row.
+For instance, if you put a wager of 2 coins on a row and that row gets matching \\$'s like "\$ | \$ | \$", then you get 4 coins multiplied by your investment (4 * 2 = 8) back for that particular row.
