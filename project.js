@@ -1,18 +1,7 @@
-/*
-Rules of Slot Machine Game:
-1. User Deposits some Money
-2. User Determines how Many Lines to bet on
-3. User Determines a Bet Amount
-4. Spins the Slot Machine
-5. Has the User won?
-6. Settle Money with the User
-7. Play Again or No Money Left?
-*/
-
-// Packages
+/* Package Imports */
 const prompt = require("prompt-sync")();
 
-// Global Variables
+/* Global Variables */
 const ROWS = 3;
 const COLS = 3;
 const SYMBOLS_COUNT = {
@@ -28,6 +17,7 @@ const SYMBOLS_VALUES = {
     A: 1,
 };
 
+/* Function Definitions */
 // Step 1: User Deposits some Money
 const depositMoney = () => {
     while(true){
@@ -77,15 +67,25 @@ const spin = () => {
         }
     }
     // List Within Represents Column
-    const reels = [[], [], []];
-    console.log(symbols.length);
+    const reels = [];
+    for (let i = 0; i < COLS; i++){
+        reels.push([]);
+        const reelSymbols = [...symbols];
+        for (let j = 0; j < ROWS; j++){
+            const randomIndex = Math.floor(Math.random() * reelSymbols.length);
+            const randomSymbol = reelSymbols[randomIndex];
+            reels[i].push(randomSymbol);
+            reelSymbols.splice(randomIndex, 1);
+        }
+    }
+    return reels;
 };
 
 const game = () => {
     let userBalance = depositMoney();
     const numberLines = determineNumberOfLines();
     const numberBet = userBetAmount(userBalance, numberLines);
-    spin();
+    const reels = spin();
 }
 
 game();
