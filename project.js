@@ -109,6 +109,7 @@ const userWinnings = (bet, lines, reels) => {
             winnings += bet * SYMBOLS_VALUES[symbol];
         }
     }
+    console.log("You won $" + winnings + "\n");
     return winnings;
 };
 
@@ -118,7 +119,7 @@ const game = () => {
         const numberLines = determineNumberOfLines();
         const numberBet = userBetAmount(userBalance, numberLines);
         userBalance = userBalance - (numberBet * numberLines);
-        console.log("Your remaining balance now is: $" + userBalance + "\n");
+        console.log("\nYour remaining balance now is: $" + userBalance + "\n");
         const reels = spin();
         print_reels(reels);
         const winning = userWinnings(numberBet, numberLines, reels);
@@ -127,7 +128,7 @@ const game = () => {
             console.log("Unfortunately, you are out of funds!\n");
             break;
         } else{
-            console.log("Your net funds are $" + userBalance + "\n");
+            console.log("\nYour net funds are $" + userBalance + "\n");
             const playAgain = prompt("Do you want to play again? (y/n)");
             if(playAgain != "y"){
                 break;
